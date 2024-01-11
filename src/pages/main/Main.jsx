@@ -1,13 +1,16 @@
 import React from "react";
-import * as S from "./style";
+import { s } from "./style";
+import NaverLogin from "../../components/login/NaverLogin";
+import MainSide from "../../components/main/mainSide/MainSide";
 
 function Main() {
   return (
-    <>
-      <S.MainTitle>메인페이지</S.MainTitle>
-      <div style={{ padding: "40px" }}>
-      </div>
-    </>
+    <s.MainPageWrapper>
+      <s.MainTitle>가치 구름</s.MainTitle>
+      <s.MainWrapper>
+        <MainSide/>
+      </s.MainWrapper>
+    </s.MainPageWrapper>
   );
 }
 
