@@ -17,7 +17,7 @@ const MainLogin = () => {
   
   return (
     <>
-      <s.Content onClick={toggleLogin}>
+      <s.Content to={'login'} onClick={toggleLogin}>
         <s.ContentDiv>{loginCheck.title}</s.ContentDiv>
         {loginCheck.content}
       </s.Content>
