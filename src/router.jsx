@@ -10,7 +10,7 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { path: "", element: <Main /> },
-      { path: 'login', element: <Login/>}
+      { path: 'login', element: <Login /> },
     ],
     errorElement: <NotFound />
   }
