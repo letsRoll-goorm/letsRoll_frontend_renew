@@ -1,13 +1,22 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
 
 function NaverLogin() {
-  const naverId = import.meta.env.VITE_NAVER_CLIENT_ID
-  const naverCallbackUrl = import.meta.env.VITE_NAVER_CALLBACK_URL
+  const naverId = import.meta.env.VITE_NAVER_CLIENT_ID;
+  const naverCallbackUrl = import.meta.env.VITE_NAVER_CALLBACK_URL;
+  const STATE = import.meta.env.VITE_NAVER_STATE;
 
   const { naver } = window;
 
-  const STATE = 'asdfasdfasdfasdf'
+  const userAccessToken = () => {
+		window.location.href.includes('access_token') && getToken()
+	}
+        
+  const getToken = () => {
+    const token = window.location.href.split('=')[1].split('&')[0]
+    console.log(token);
+
+	}
 
   const initNaverLogin = () => {
   	const naverLogin = new naver.LoginWithNaverId({
@@ -22,18 +31,10 @@ function NaverLogin() {
 
   useEffect(() => {
     initNaverLogin()
-  }, [])
-
-  // const authUrl = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=`
-  // const NAVER_AUTH_URL =
-  //   authUrl +`${naverId}&redirect_uri=${naverCallbackUrl}&state=${STATE}`
-  
-  // const naverLoginPopup = () =>
-  //   window.location.href = NAVER_AUTH_URL
-  // //   // navigate('/oauth')
+    userAccessToken()
+  })
 
   return (
-    // <div id="naverIdLogin" onClick={naverLoginPopup}></div>
     <div id="naverIdLogin"></div>
   )
 }
