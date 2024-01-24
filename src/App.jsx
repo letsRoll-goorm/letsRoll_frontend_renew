@@ -3,6 +3,7 @@ import { GlobalStyle } from "./style/globalStyle";
 import { theme } from "./style/theme.js";
 
 import { Outlet } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 const Wrapper = styled.div`
   margin: 0 auto;
@@ -25,13 +26,17 @@ const Layout = () => {
   );
 };
 
+const queryClient = new QueryClient()
+
 function App() {
   return (
     <>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <Layout />
-      </ThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider theme={theme}>
+          <GlobalStyle />
+          <Layout />
+        </ThemeProvider>
+      </QueryClientProvider>
     </>
   );
 }
