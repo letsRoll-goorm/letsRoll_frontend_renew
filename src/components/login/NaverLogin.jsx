@@ -1,12 +1,16 @@
-import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom";
+import { useEffect } from "react"
+import { useMutation } from "react-query";
+import { loginByToken } from "../../api/query/queries";
 
 function NaverLogin() {
   const naverId = import.meta.env.VITE_NAVER_CLIENT_ID;
   const naverCallbackUrl = import.meta.env.VITE_NAVER_CALLBACK_URL;
-  const STATE = import.meta.env.VITE_NAVER_STATE;
 
   const { naver } = window;
+
+  const { mutate } = useMutation({
+    mutationFn:loginByToken
+  })
 
   const userAccessToken = () => {
 		window.location.href.includes('access_token') && getToken()
@@ -14,8 +18,7 @@ function NaverLogin() {
         
   const getToken = () => {
     const token = window.location.href.split('=')[1].split('&')[0]
-    console.log(token);
-
+    mutate(token)
 	}
 
   const initNaverLogin = () => {
@@ -32,7 +35,7 @@ function NaverLogin() {
   useEffect(() => {
     initNaverLogin()
     userAccessToken()
-  })
+  },[])
 
   return (
     <div id="naverIdLogin"></div>
